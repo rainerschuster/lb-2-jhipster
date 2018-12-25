@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/ziogiugno/lb-2-jhipster#readme",
   "dependencies": {
+    "@types/commander": "^2.12.2",
+    "commander": "^2.19.0",
     "loopback": "^3.20.0",
     "loopback-connector-oracle": "^3.2.0",
     "oracledb": "github:oracle/node-oracledb#v2.3.0"

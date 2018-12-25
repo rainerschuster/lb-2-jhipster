@@ -1,14 +1,25 @@
 var loopback = require('loopback');
 const fs = require('fs');
+var p=require('commander');
+
+p.version('0.0.1')
+.option('-H,--host','database server',null,'localhost')
+.option('-P,--port','port number,default 1521',null,1521)
+.option('-D,--database','database instance',null,'orcl')
+.option('-u,--username','database user name')
+.option('-p,--password','database password')
+.option('-o,--output','output file')
+.parse(process.argv);
+
 
 var OUT_FILE = "db-2-jdl.jdl";
 
 var ds = loopback.createDataSource('oracle', {
-  "host": "localhost",
-  "port": 1521,
-  "database": "HR",
-  "username": "scott",
-  "password": "tiger"
+  "host": p.host,
+  "port": p.port,
+  "database": p.database,
+  "username": p.username,
+  "password": p.password
 });
 
 fs.access( OUT_FILE, fs.constants.R_OK | fs.constants.W_OK, (err) => {
