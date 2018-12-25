@@ -22,6 +22,7 @@
   "dependencies": {
     "@types/commander": "^2.12.2",
     "@types/loopback": "^3.2.6",
+    "@types/oracledb": "^1.11.34",
     "commander": "^2.19.0",
     "loopback": "^3.20.0",
     "loopback-connector-oracle": "^3.2.0",
