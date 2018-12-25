@@ -8,11 +8,11 @@ p.version('0.0.1')
 .option('-D,--database','database instance',null,'orcl')
 .option('-u,--username','database user name')
 .option('-p,--password','database password')
-.option('-o,--output','output file')
+.option('-o,--output','output file',null,'db2jdl.jdl')
 .parse(process.argv);
 
 
-var OUT_FILE = "db-2-jdl.jdl";
+var OUT_FILE = p.output;
 
 var ds = loopback.createDataSource('oracle', {
   "host": p.host,
@@ -182,4 +182,4 @@ ds.discoverAndBuildModels(tableName, {visited: {}, associations: true},
 
 }
 
-console.log("File db-2-jdl.jdl generated");
+console.log("File db2jdl.jdl generated");
