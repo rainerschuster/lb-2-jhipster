@@ -1,10 +1,13 @@
 {
-  "name": "lb-2-jhipster",
+  "name": "db2jdl",
   "version": "1.0.0",
   "description": "Introspect Oracle database and generate JHipster Domain Language file.",
-  "main": "db-2-jdl.js",
+  "main": "db2jdl.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "db2jdl": "./db2jdl.js"
   },
   "repository": {
     "type": "git",
@@ -20,14 +23,13 @@
   },
   "homepage": "https://github.com/ziogiugno/lb-2-jhipster#readme",
   "dependencies": {
+    "@types/commander": "^2.12.2",
+    "@types/loopback": "^3.2.6",
+    "@types/oracledb": "^1.11.34",
     "commander": "^2.19.0",
     "loopback": "^3.20.0",
     "loopback-connector-oracle": "^3.2.0",
-    "oracledb": "github:oracle/node-oracledb#v2.3.0"
+    "oracledb": "^2.3.0"
   },
-  "devDependencies": {
-    "@types/commander": "^2.12.2",
-    "@types/loopback": "^3.2.6",
-    "@types/oracledb": "^1.11.34"
-  }
+  "devDependencies": {}
 }
