@@ -1,18 +1,22 @@
+#!/usr/bin/env node
+
+'use strict';
+
 var loopback = require('loopback');
 const fs = require('fs');
 var p=require('commander');
 
 p.version('0.0.1')
-.option('-H,--host','database server',null,'localhost')
-.option('-P,--port','port number,default 1521',null,1521)
-.option('-D,--database','database instance',null,'orcl')
-.option('-u,--username','database user name')
-.option('-p,--password','database password')
-.option('-o,--output','output file',null,'db2jdl.jdl')
+.option('-H,--host <host>','database server',null,'localhost')
+.option('-P,--port <port>','port number,default 1521',parseInt,1521)
+.option('-D,--database <instance>','database instance',null,'orcl')
+.option('-u,--username <username>','database user name')
+.option('-p,--password <password>','database password')
+.option('-o,--output <file>','output file',null,'db2jdl.jdl')
 .parse(process.argv);
 
-
 var OUT_FILE = p.output;
+//console.debug(p);
 
 var ds = loopback.createDataSource('oracle', {
   "host": p.host,
@@ -172,7 +176,6 @@ ds.discoverAndBuildModels(tableName, {visited: {}, associations: true},
 
               }
 
-
               fs.appendFileSync(OUT_FILE, "relationship " + relstr + " { " + m + "(" + relobj.keyFrom + ") to " + relobj.modelTo.definition.name + "(" + relobj.keyTo + ")" + " },\n" );
           }
         }
@@ -182,4 +185,4 @@ ds.discoverAndBuildModels(tableName, {visited: {}, associations: true},
 
 }
 
-console.log("File db2jdl.jdl generated");
+console.log(`File ${p.output} generated`);
