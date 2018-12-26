@@ -34,7 +34,7 @@ fs.access( OUT_FILE, fs.constants.R_OK | fs.constants.W_OK, (err) => {
   }
 });
 
-ds.discoverModelDefinitions({views: false, limit: 50}, 
+ds.discoverModelDefinitions({views: false, limit: 0}, 
   function (err, models) {
     models.forEach(processModel);
   }
@@ -147,7 +147,7 @@ function processModel(item, index) {
   });
 }
 
-function processRelationShips(tableName, modelName){
+function processRelationShips(tableName){
 
 ds.discoverAndBuildModels(tableName, {visited: {}, associations: true},
 
