@@ -148,7 +148,7 @@ function processModel(item, index) {
 
     fs.appendFileSync(OUT_FILE, "\n}, \n");
 
-    //processRelationShips(itemName);
+    processRelationShips(itemName);
   });
 }
 
