@@ -12,7 +12,7 @@ p.version('0.0.1')
 .option('-D,--database <instance>','database instance',null,'orcl')
 .option('-u,--username <username>','database user name')
 .option('-p,--password <password>','database password')
-.option('-o,--output <file>','output file',null,'db2jdl.jdl')
+.option('-o,--output <file>','output file',null,'./db2jdl.jdl')
 .parse(process.argv);
 
 var OUT_FILE = p.output;
@@ -149,40 +149,40 @@ function processModel(item, index) {
 
 function processRelationShips(tableName){
 
-ds.discoverAndBuildModels(tableName, {visited: {}, associations: true},
+  ds.discoverAndBuildModels(tableName, {visited: {}, associations: true},
 
-  function (err, models) {
-    for ( var m in  models){
-        
-        if (!models.hasOwnProperty(m)) continue;
+    function (err, models) {
+      for ( var m in  models){
+          
+          if (!models.hasOwnProperty(m)) continue;
 
-        var obj = models[m];    
+          var obj = models[m];    
 
-        if(obj.relations){
-          for ( var r in  obj.relations){
-        
-              if (!obj.relations.hasOwnProperty(r)) continue;
+          if(obj.relations){
+            for ( var r in  obj.relations){
+          
+                if (!obj.relations.hasOwnProperty(r)) continue;
 
-              var relobj =  obj.relations[r];
-              var relstr = "OneToOne";
-              switch(relobj.type){
+                var relobj =  obj.relations[r];
+                var relstr = "OneToOne";
+                switch(relobj.type){
 
-                case "belongsTo":
-                  relstr = "OneToMany";
-                  break; 
+                  case "belongsTo":
+                    relstr = "OneToMany";
+                    break; 
 
-                default:
-                  relstr = "Unknown";
+                  default:
+                    relstr = "Unknown";
 
-              }
+                }
 
-              fs.appendFileSync(OUT_FILE, "relationship " + relstr + " { " + m + "(" + relobj.keyFrom + ") to " + relobj.modelTo.definition.name + "(" + relobj.keyTo + ")" + " },\n" );
+                fs.appendFileSync(OUT_FILE, "relationship " + relstr + " { " + m + "(" + relobj.keyFrom + ") to " + relobj.modelTo.definition.name + "(" + relobj.keyTo + ")" + " },\n" );
+            }
           }
-        }
+      }
     }
-  }
-);
+  );
 
 }
 
-console.log(`File ${p.output} generated`);
+console.log(`File ${p.output} being generated`);
