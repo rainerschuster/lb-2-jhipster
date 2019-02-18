@@ -65,15 +65,11 @@ function processModel(item, index) {
             fs.appendFileSync(OUT_FILE, schema.properties[column].oracle.dataLength);
             fs.appendFileSync(OUT_FILE, ")");
             break;
-
           case "Date":
             fs.appendFileSync(OUT_FILE, "LocalDate");
 
             break;
-
           case "Number":
-
-
             var length = schema.properties[column].oracle.dataLength;
             var precision = schema.properties[column].oracle.dataPrecision;
             var scale = schema.properties[column].oracle.dataScale;
@@ -131,17 +127,13 @@ function processModel(item, index) {
             }else{
               fs.appendFileSync(OUT_FILE, " BigDecimal");
             }
-
             break;
-          
           case "Boolean":
             fs.appendFileSync(OUT_FILE, "Boolean");
             break;
-
           case "Binary":
-            fs.appendFileSync(OUT_FILE, "");
+            fs.appendFileSync(OUT_FILE, "Blob");
             break;
-
           default:
             console.debug("column name:"+column+",column type:"+schema.properties[column].type);
         }
