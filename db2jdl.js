@@ -142,6 +142,25 @@ function processModel(item, index) {
               fs.appendFileSync(OUT_FILE, " required");
             }
             break;
+          
+          case "Boolean":
+            fs.appendFileSync(OUT_FILE, "Boolean");
+
+            if( schema.properties[column].required ){
+              fs.appendFileSync(OUT_FILE, " required");
+            }
+            break;
+
+          case "Binary":
+            fs.appendFileSync(OUT_FILE, "Blob");
+
+            if( schema.properties[column].required ){
+              fs.appendFileSync(OUT_FILE, " required");
+            }
+            break;
+
+          default:
+            console.debug("column name:"+column+",column type:"+schema.properties[column].type);
         }
 
       }
