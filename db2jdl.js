@@ -36,7 +36,7 @@ fs.access( OUT_FILE, fs.constants.R_OK | fs.constants.W_OK, (err) => {
 
 ds.discoverModelDefinitions({views: false, limit: 0}, 
   function (err, models) {
-    if (!err) {
+    if (err) {
       throw err;
     }
     models.forEach(processModel);
@@ -46,8 +46,9 @@ ds.discoverModelDefinitions({views: false, limit: 0},
 function processModel(item, index) {
 
   var itemName = item.name;
+  console.debug("tableName:"+itemName);
   ds.discoverSchema(itemName, function (err, schema) {
-    if (!err) {
+    if (err) {
       throw err;
     }
     fs.appendFileSync(OUT_FILE, "\nentity " + schema.name + " { \n\n" );
@@ -149,7 +150,7 @@ function processModel(item, index) {
 
     fs.appendFileSync(OUT_FILE, "\n}, \n");
 
-    processRelationShips(itemName);
+    //processRelationShips(itemName);
   });
 }
 
@@ -158,7 +159,7 @@ function processRelationShips(tableName){
   ds.discoverAndBuildModels(tableName, {visited: {}, associations: true},
 
     function (err, models) {
-      if (!err) {
+      if (err) {
         throw err;
       }
       for ( var m in  models){
