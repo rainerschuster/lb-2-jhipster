@@ -49,6 +49,7 @@ function processModel(item, index) {
   console.debug("tableName:"+itemName);
   ds.discoverSchema(itemName, function (err, schema) {
     if (err) {
+      console.error(err);
       throw err;
     }
     fs.appendFileSync(OUT_FILE, "\nentity " + schema.name + " { \n\n" );
