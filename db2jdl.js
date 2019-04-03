@@ -7,12 +7,12 @@ const fs = require('fs');
 var p=require('commander');
 
 p.version('0.0.1')
-.option('-H,--host <host>','database server',null,'localhost')
+.option('-H,--host <host>','database server','localhost')
 .option('-P,--port <port>','port number,default 1521',parseInt,1521)
-.option('-D,--database <instance>','database instance',null,'orcl')
+.option('-D,--database <instance>','database instance','orcl')
 .option('-u,--username <username>','database user name')
 .option('-p,--password <password>','database password')
-.option('-o,--output <file>','output file',null,'./db2jdl.jdl')
+.option('-o,--output <file>','output file','./db2jdl.jdl')
 .parse(process.argv);
 
 var OUT_FILE = p.output;
@@ -172,11 +172,12 @@ function processRelationShips(tableName){
                 if (!obj.relations.hasOwnProperty(r)) continue;
 
                 var relobj =  obj.relations[r];
+                console.log(`relation: `+JSON.stringify(relobj));
                 var relstr = "OneToOne";
                 switch(relobj.type){
 
                   case "belongsTo":
-                    relstr = "OneToMany";
+                    relstr = "ManyToOne";
                     break; 
 
                   default:
